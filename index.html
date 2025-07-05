@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I Miss You</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>I miss you Varshini ❤️</h1>
+    <p>Do you miss me too?</p>
+
+    <div id="timer" class="timer"></div>
+
+    <div class="buttons">
+      <button id="noRunBtn" class="no-btn">No... 🏃‍♀️</button>
+      <button id="yesBtn">Yes 😘</button>
+      <button id="noShrinkBtn" class="no-btn">No... 🙅‍♀️</button>
+    </div>
+  </div>
+
+  <script>
+    const noRunBtn = document.getElementById('noRunBtn');
+    const noShrinkBtn = document.getElementById('noShrinkBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const timerDiv = document.getElementById('timer');
+
+    // 🕒 Timer since June 2, 2025
+    function updateTimer() {
+      const startDate = new Date("2025-06-02T00:00:00");
+      const now = new Date();
+      const diff = now - startDate;
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      timerDiv.innerHTML = `We've been talking for ❤️ <strong>${days}d ${hours}h ${minutes}m ${seconds}s</strong>`;
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    // 💨 No Button that runs away
+    function moveNoButton() {
+      const x = Math.floor(Math.random() * (window.innerWidth - 100));
+      const y = Math.floor(Math.random() * (window.innerHeight - 100));
+      noRunBtn.style.position = 'absolute';
+      noRunBtn.style.left = `${x}px`;
+      noRunBtn.style.top = `${y}px`;
+    }
+
+    // 📱 Support hover and click
+    noRunBtn.addEventListener('mouseover', moveNoButton);
+    noRunBtn.addEventListener('click', moveNoButton);
+
+    // 🙅 Shrink button with disappear logic
+    let shrinkClicks = 0;
+    noShrinkBtn.addEventListener('click', () => {
+      shrinkClicks++;
+      let scale = 1 - shrinkClicks * 0.2;
+      if (scale <= 0.2) {
+        noShrinkBtn.style.display = 'none';
+      } else {
+        noShrinkBtn.style.transform = `scale(${scale})`;
+      }
+    });
+
+    // 💗 Yes Button
+    yesBtn.addEventListener('click', () => {
+      window.location.href = "yes.html";
+    });
+  </script>
+</body>
+</html>
